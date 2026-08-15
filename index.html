@@ -1,0 +1,1079 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio 2029</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;600;700;800&display=swap" rel="stylesheet" />
+    <style>
+:root {
+  --stage-width: 1920;
+  --stage-height: 1080;
+  --stage-scale: 1;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  background: #030100;
+  font-family: "Outfit", Arial, Helvetica, sans-serif;
+}
+
+img {
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+.viewport {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background: #030100;
+}
+
+.stage {
+  position: relative;
+  width: 1920px;
+  height: 1080px;
+  flex: 0 0 auto;
+  overflow: hidden;
+  transform: scale(var(--stage-scale));
+  transform-origin: center center;
+  background: #060300;
+  isolation: isolate;
+}
+
+.background {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cursor-glow {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 240px;
+  height: 240px;
+  margin-left: -120px;
+  margin-top: -120px;
+  border-radius: 50%;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2;
+  background: radial-gradient(circle, rgba(255, 149, 0, 0.2), rgba(255, 149, 0, 0.05) 38%, transparent 68%);
+  mix-blend-mode: screen;
+  transition: opacity 180ms ease;
+}
+
+.stage.is-active .cursor-glow {
+  opacity: 1;
+}
+
+.corner {
+  position: absolute;
+  z-index: 30;
+  color: #fff;
+  transform-origin: center;
+  transition: transform 240ms ease, filter 240ms ease;
+  will-change: transform;
+}
+
+.corner.near {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 18px rgba(255, 255, 255, 0.15));
+}
+
+.corner-brand {
+  left: 54.21px;
+  top: 51.5px;
+  width: 331.79px;
+  height: 36.72px;
+  display: flex;
+  align-items: center;
+}
+
+.brand-skew {
+  transform: skewX(-14.93deg) scaleY(0.97);
+  white-space: nowrap;
+  font-size: 30px;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.brand-skew .light {
+  font-weight: 300;
+}
+
+.brand-skew .dot,
+.brand-skew strong {
+  font-weight: 800;
+}
+
+.corner-dots {
+  left: 1792px;
+  top: 60px;
+  width: 68px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+}
+
+.dot-shape {
+  width: 26px;
+  height: 26px;
+  margin-right: -5px;
+}
+
+.corner-portfolio {
+  left: 54px;
+  top: 969px;
+  width: 326px;
+  height: 55px;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 1.26;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.bottom-line {
+  width: 57px;
+  height: 1px;
+  margin-bottom: 10px;
+}
+
+.contact {
+  margin: 0;
+  top: 986.14px;
+  height: 38px;
+  font-size: 30px;
+  line-height: 1.26;
+  white-space: nowrap;
+}
+
+.contact strong {
+  font-weight: 800;
+}
+
+.contact span {
+  font-weight: 300;
+}
+
+.contact-tel {
+  left: 1189.56px;
+  width: 227px;
+}
+
+.contact-email {
+  left: 1500px;
+  width: 369px;
+}
+
+.portfolio-letter {
+  position: absolute;
+  z-index: 12;
+  opacity: 0;
+  animation: letterFade 600ms cubic-bezier(0.2, 0.72, 0.24, 1) var(--delay) forwards;
+  filter: blur(10px);
+  will-change: opacity, transform, filter;
+}
+
+.letter-p {
+  left: 367.87px;
+  top: 461.04px;
+  width: 151.09px;
+  height: 215.03px;
+}
+
+.letter-o-left {
+  left: 534.08px;
+  top: 461.04px;
+  width: 152.5px;
+  height: 159.96px;
+}
+
+.letter-r {
+  left: 701.71px;
+  top: 460.84px;
+  width: 94px;
+  height: 157.14px;
+}
+
+.letter-t {
+  left: 810.83px;
+  top: 427.11px;
+  width: 114.36px;
+  height: 193.1px;
+}
+
+.image-10 {
+  left: 850px;
+  top: 211px;
+  width: 354px;
+  height: 688px;
+  object-fit: cover;
+  z-index: 10;
+}
+
+.letter-o-mid {
+  left: 1101.89px;
+  top: 461.04px;
+  width: 152.5px;
+  height: 159.96px;
+}
+
+.letter-l {
+  left: 1269.51px;
+  top: 409.54px;
+  width: 42.97px;
+  height: 211.46px;
+}
+
+.letter-i {
+  left: 1329.22px;
+  top: 408.84px;
+  width: 42.97px;
+  height: 212.16px;
+}
+
+.letter-o-right {
+  left: 1389.13px;
+  top: 461.04px;
+  width: 152.5px;
+  height: 159.96px;
+}
+
+.tile {
+  position: absolute;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.burst {
+  animation:
+    centerBurst 1050ms cubic-bezier(0.13, 0.78, 0.18, 1) var(--delay) forwards,
+    tileFloat var(--float-duration, 3600ms) ease-in-out calc(var(--delay) + 1.05s + var(--float-offset, 0s)) infinite;
+}
+
+.magnet {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 180ms ease-out;
+  will-change: transform;
+}
+
+.tile-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.tile-card img {
+  position: absolute;
+  max-width: none;
+  pointer-events: none;
+}
+
+.tile-1 {
+  --float-y: -13px;
+  --float-duration: 3800ms;
+  --float-offset: 0s;
+  left: 481.5px;
+  top: 263.96px;
+  width: 180.91px;
+  height: 180.88px;
+}
+
+.image-1-card {
+  width: 137.58px;
+  height: 137.53px;
+  border-radius: 30px;
+  transform: rotate(-23.42deg);
+  box-shadow: 0 4px 112px rgba(255, 149, 0, 0.3);
+}
+
+.image-1-card img {
+  left: -12.5%;
+  top: -12.45%;
+  width: 124.62%;
+  height: 124.67%;
+}
+
+.tile-2 {
+  --float-y: -10px;
+  --float-duration: 3400ms;
+  --float-offset: 0.24s;
+  left: 824.46px;
+  top: 274.39px;
+  width: 151.31px;
+  height: 138.7px;
+}
+
+.image-2-card {
+  width: 122.8px;
+  height: 99.99px;
+  transform: rotate(-21.99deg);
+}
+
+.image-2-card img {
+  left: 0;
+  top: -9.33%;
+  width: 100%;
+  height: 122.81%;
+}
+
+.tile-3 {
+  --float-y: -12px;
+  --float-duration: 4100ms;
+  --float-offset: 0.38s;
+  left: 1264.53px;
+  top: 231.44px;
+  width: 142.3px;
+  height: 142.47px;
+}
+
+.image-3-card {
+  width: 116.14px;
+  height: 116.38px;
+  border-radius: 26px;
+  transform: rotate(15deg);
+  box-shadow: 0 4px 66.6px rgba(255, 149, 0, 0.3);
+}
+
+.image-3-card img {
+  left: -12.37%;
+  top: -12.22%;
+  width: 124.6%;
+  height: 124.33%;
+}
+
+.tile-6 {
+  --float-y: -11px;
+  --float-duration: 3600ms;
+  --float-offset: 0.14s;
+  left: 1230.66px;
+  top: 668.71px;
+  width: 133.9px;
+  height: 133.94px;
+}
+
+.image-6-card {
+  width: 109.32px;
+  height: 109.37px;
+  border-radius: 24px;
+  transform: rotate(15deg);
+  box-shadow: 0 4px 79.9px rgba(255, 149, 0, 0.3);
+}
+
+.image-6-card img {
+  left: -12.05%;
+  top: -12.06%;
+  width: 124.06%;
+  height: 124%;
+}
+
+.tile-4 {
+  --float-y: -8px;
+  --float-duration: 3300ms;
+  --float-offset: 0.31s;
+  left: 480.46px;
+  top: 700.66px;
+  width: 90.74px;
+  height: 90.69px;
+}
+
+.image-4-card {
+  width: 70.95px;
+  height: 70.88px;
+  border-radius: 16px;
+  transform: rotate(-19.77deg);
+  box-shadow: 0 4px 50px rgba(255, 149, 0, 0.3);
+}
+
+.image-4-card img {
+  left: -11.49%;
+  top: -11.64%;
+  width: 123.55%;
+  height: 123.68%;
+}
+
+.tile-5 {
+  --float-y: -10px;
+  --float-duration: 3700ms;
+  --float-offset: 0.46s;
+  left: 648px;
+  top: 771px;
+  width: 92.98px;
+  height: 92.98px;
+}
+
+.image-5-card {
+  position: relative;
+  width: 69.12px;
+  height: 69.12px;
+  transform: rotate(-27.04deg);
+}
+
+.image-5-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.conditional {
+  position: absolute;
+  z-index: 24;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(10px) scale(0.98);
+  filter: blur(8px);
+  transition: opacity 280ms ease, transform 280ms ease, filter 280ms ease;
+  will-change: opacity, transform, filter;
+}
+
+.conditional.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+}
+
+.polygon-wrap {
+  left: 333.68px;
+  top: 672.87px;
+  width: 33.01px;
+  height: 33.01px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.polygon-rotate {
+  width: 22.13px;
+  height: 24.56px;
+  transform: rotate(45deg);
+}
+
+.polygon-rotate img {
+  width: 100%;
+  height: 100%;
+}
+
+.image-7 {
+  left: 364px;
+  top: 458px;
+  width: 158px;
+  height: 222px;
+  object-fit: cover;
+}
+
+.image-9 {
+  left: 1099px;
+  top: 404px;
+  width: 448px;
+  height: 224px;
+  object-fit: cover;
+}
+
+.pen-1 {
+  left: 1543.92px;
+  top: 625.09px;
+  width: 41.08px;
+  height: 28.59px;
+}
+
+.after-title {
+  position: absolute;
+  z-index: 25;
+  opacity: 0;
+  pointer-events: none;
+  will-change: opacity, transform, clip-path;
+}
+
+.draw-hover-zone {
+  position: absolute;
+  left: 585px;
+  top: 650px;
+  width: 285px;
+  height: 100px;
+  z-index: 45;
+  background: transparent;
+}
+
+.image-8 {
+  left: 587px;
+  top: 662px;
+  width: 241px;
+  height: 82px;
+  overflow: hidden;
+  clip-path: inset(0 100% 0 0);
+  animation: drawImage8 660ms linear 1.95s forwards;
+}
+
+.image-8.replay-draw {
+  animation: redrawImage8 660ms linear 0s forwards;
+}
+
+.image-8.draw-complete {
+  animation: none;
+  opacity: 1;
+  clip-path: inset(0 0 0 0);
+}
+
+.image-8 img {
+  position: absolute;
+  left: 0;
+  top: -97.78%;
+  width: 100%;
+  height: 285.79%;
+  max-width: none;
+}
+
+.pen-2 {
+  left: 827.47px;
+  top: 657.97px;
+  width: 36.64px;
+  height: 35.87px;
+  transform-origin: 0 100%;
+  animation: drawPen2 660ms linear 1.95s forwards;
+}
+
+.pen-2.replay-draw {
+  animation: redrawPen2 660ms linear 0s forwards;
+}
+
+.pen-2.draw-complete {
+  animation: none;
+  opacity: 1;
+  transform: translate3d(0, 0, 0) rotate(0deg);
+}
+
+@keyframes centerBurst {
+  0% {
+    opacity: 0;
+    transform: translate(var(--from-x), var(--from-y)) scale(0.08) rotate(var(--spin));
+    filter: blur(14px) brightness(1.3);
+  }
+
+  68% {
+    opacity: 1;
+    transform: translate(var(--over-x), var(--over-y)) scale(1.08) rotate(0deg);
+    filter: blur(0) brightness(1.08);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) rotate(0deg);
+    filter: blur(0) brightness(1);
+  }
+}
+
+@keyframes tileFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, var(--float-y), 0);
+  }
+}
+
+@keyframes letterFade {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.965);
+    filter: blur(10px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes drawImage8 {
+  0% {
+    opacity: 1;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes drawPen2 {
+  0% {
+    opacity: 0;
+    transform: translate3d(-241px, 8px, 0) rotate(-23deg);
+  }
+
+  6% {
+    opacity: 1;
+    transform: translate3d(-228px, 1px, 0) rotate(-25deg);
+  }
+
+  12% {
+    opacity: 1;
+    transform: translate3d(-214px, -5px, 0) rotate(-24deg);
+  }
+
+  18% {
+    opacity: 1;
+    transform: translate3d(-199px, -10px, 0) rotate(-21deg);
+  }
+
+  24% {
+    opacity: 1;
+    transform: translate3d(-184px, -14px, 0) rotate(-15deg);
+  }
+
+  31% {
+    opacity: 1;
+    transform: translate3d(-166px, -16px, 0) rotate(-6deg);
+  }
+
+  38% {
+    opacity: 1;
+    transform: translate3d(-148px, -13px, 0) rotate(4deg);
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate3d(-131px, -7px, 0) rotate(13deg);
+  }
+
+  52% {
+    opacity: 1;
+    transform: translate3d(-114px, 2px, 0) rotate(20deg);
+  }
+
+  59% {
+    opacity: 1;
+    transform: translate3d(-96px, 10px, 0) rotate(23deg);
+  }
+
+  66% {
+    opacity: 1;
+    transform: translate3d(-78px, 14px, 0) rotate(18deg);
+  }
+
+  73% {
+    opacity: 1;
+    transform: translate3d(-61px, 15px, 0) rotate(9deg);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translate3d(-44px, 12px, 0) rotate(0deg);
+  }
+
+  87% {
+    opacity: 1;
+    transform: translate3d(-28px, 7px, 0) rotate(-9deg);
+  }
+
+  94% {
+    opacity: 1;
+    transform: translate3d(-13px, 2px, 0) rotate(-12deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes redrawImage8 {
+  0% {
+    opacity: 1;
+    clip-path: inset(0 100% 0 0);
+  }
+
+  100% {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes redrawPen2 {
+  0% {
+    opacity: 0;
+    transform: translate3d(-241px, 8px, 0) rotate(-23deg);
+  }
+
+  6% {
+    opacity: 1;
+    transform: translate3d(-228px, 1px, 0) rotate(-25deg);
+  }
+
+  12% {
+    opacity: 1;
+    transform: translate3d(-214px, -5px, 0) rotate(-24deg);
+  }
+
+  18% {
+    opacity: 1;
+    transform: translate3d(-199px, -10px, 0) rotate(-21deg);
+  }
+
+  24% {
+    opacity: 1;
+    transform: translate3d(-184px, -14px, 0) rotate(-15deg);
+  }
+
+  31% {
+    opacity: 1;
+    transform: translate3d(-166px, -16px, 0) rotate(-6deg);
+  }
+
+  38% {
+    opacity: 1;
+    transform: translate3d(-148px, -13px, 0) rotate(4deg);
+  }
+
+  45% {
+    opacity: 1;
+    transform: translate3d(-131px, -7px, 0) rotate(13deg);
+  }
+
+  52% {
+    opacity: 1;
+    transform: translate3d(-114px, 2px, 0) rotate(20deg);
+  }
+
+  59% {
+    opacity: 1;
+    transform: translate3d(-96px, 10px, 0) rotate(23deg);
+  }
+
+  66% {
+    opacity: 1;
+    transform: translate3d(-78px, 14px, 0) rotate(18deg);
+  }
+
+  73% {
+    opacity: 1;
+    transform: translate3d(-61px, 15px, 0) rotate(9deg);
+  }
+
+  80% {
+    opacity: 1;
+    transform: translate3d(-44px, 12px, 0) rotate(0deg);
+  }
+
+  87% {
+    opacity: 1;
+    transform: translate3d(-28px, 7px, 0) rotate(-9deg);
+  }
+
+  94% {
+    opacity: 1;
+    transform: translate3d(-13px, 2px, 0) rotate(-12deg);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .burst,
+  .portfolio-letter,
+  .after-title {
+    animation-duration: 1ms;
+    animation-delay: 1ms !important;
+    animation-iteration-count: 1;
+  }
+
+  .magnet,
+  .corner,
+  .conditional {
+    transition-duration: 1ms;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <main class="viewport" aria-label="Interactive portfolio">
+      <section class="stage" aria-label="Frame 2029">
+        <img class="background" src="./assets/background.png" alt="" />
+        <div class="cursor-glow" aria-hidden="true"></div>
+
+        <div class="corner corner-brand proximity" data-proximity-x="220" data-proximity-y="70" data-proximity-radius="180">
+          <div class="brand-skew">
+            <span class="light">UI/UX DESIGN</span>
+            <span class="dot">&middot;</span>
+            <strong>2026</strong>
+            <span class="light">*</span>
+          </div>
+        </div>
+
+        <div class="corner corner-dots proximity" data-proximity-x="1826" data-proximity-y="73" data-proximity-radius="120" aria-hidden="true">
+          <img class="dot-shape" src="./assets/ellipse-2309.svg" alt="" />
+          <img class="dot-shape" src="./assets/ellipse-2308.svg" alt="" />
+          <img class="dot-shape" src="./assets/ellipse-2307.svg" alt="" />
+        </div>
+
+        <div class="corner corner-portfolio proximity" data-proximity-x="210" data-proximity-y="1008" data-proximity-radius="190">
+          <img class="bottom-line" src="./assets/vector-3764.svg" alt="" />
+          <span>PERSONAL PORTFOLIO</span>
+        </div>
+
+        <p class="corner contact contact-tel proximity" data-proximity-x="1320" data-proximity-y="1006" data-proximity-radius="190">
+          <strong>Tel</strong> <span>15635098743</span>
+        </p>
+
+        <p class="corner contact contact-email proximity" data-proximity-x="1684" data-proximity-y="1006" data-proximity-radius="230">
+          <strong>Email</strong> <span>422099548@qq.com</span>
+        </p>
+
+        <img class="portfolio-letter letter-p letter-step" src="./assets/p.svg" alt="p" style="--delay: 0.55s" />
+        <img class="portfolio-letter letter-o-left letter-step" src="./assets/o-left.svg" alt="o" style="--delay: 0.65s" />
+        <img class="portfolio-letter letter-r letter-step" src="./assets/r.svg" alt="r" style="--delay: 0.75s" />
+        <img class="portfolio-letter letter-t letter-step" src="./assets/t.svg" alt="t" style="--delay: 0.85s" />
+        <img class="portfolio-letter image-10 letter-step" src="./assets/image-10.png" alt="f" style="--delay: 0.95s" />
+        <img class="portfolio-letter letter-o-mid letter-step" src="./assets/o-mid.svg" alt="o" style="--delay: 1.05s" />
+        <img class="portfolio-letter letter-l letter-step" src="./assets/l.svg" alt="l" style="--delay: 1.15s" />
+        <img class="portfolio-letter letter-i letter-step" src="./assets/i.svg" alt="i" style="--delay: 1.25s" />
+        <img class="portfolio-letter letter-o-right letter-step" src="./assets/o-right.svg" alt="o" style="--delay: 1.35s" />
+
+        <div class="tile burst tile-1 float-react" style="--from-x: 388px; --from-y: 186px; --over-x: -18px; --over-y: -9px; --delay: 0.08s; --spin: -38deg">
+          <div class="magnet">
+            <div class="tile-card image-1-card">
+              <img src="./assets/image-1.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="tile burst tile-2 float-react" style="--from-x: 60px; --from-y: 196px; --over-x: -5px; --over-y: -15px; --delay: 0.17s; --spin: 28deg">
+          <div class="magnet">
+            <div class="tile-card image-2-card">
+              <img src="./assets/image-2.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="tile burst tile-3 float-react" style="--from-x: -376px; --from-y: 237px; --over-x: 18px; --over-y: -11px; --delay: 0.26s; --spin: 36deg">
+          <div class="magnet">
+            <div class="tile-card image-3-card">
+              <img src="./assets/image-3.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="tile burst tile-6 float-react" style="--from-x: -338px; --from-y: -196px; --over-x: 16px; --over-y: 9px; --delay: 0.35s; --spin: -34deg">
+          <div class="magnet">
+            <div class="tile-card image-6-card">
+              <img src="./assets/image-6.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="tile burst tile-4 float-react" style="--from-x: 434px; --from-y: -206px; --over-x: -20px; --over-y: 10px; --delay: 0.44s; --spin: 30deg">
+          <div class="magnet">
+            <div class="tile-card image-4-card">
+              <img src="./assets/image-4.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="tile burst tile-5 float-react" style="--from-x: 266px; --from-y: -278px; --over-x: -12px; --over-y: 14px; --delay: 0.53s; --spin: -32deg">
+          <div class="magnet">
+            <div class="image-5-card">
+              <img src="./assets/image-5.png" alt="" />
+            </div>
+          </div>
+        </div>
+
+        <div class="conditional left-reveal polygon-wrap" data-zone="left">
+          <div class="polygon-rotate">
+            <img src="./assets/polygon-1.svg" alt="" />
+          </div>
+        </div>
+
+        <img class="conditional left-reveal image-7" data-zone="left" src="./assets/image-7.png" alt="" />
+
+        <img class="conditional right-reveal image-9" data-zone="right" src="./assets/image-9.png" alt="" />
+        <img class="conditional right-reveal pen-1" data-zone="right" src="./assets/pen-1.svg" alt="" />
+
+        <div class="after-title image-8">
+          <img src="./assets/image-8.png" alt="" />
+        </div>
+        <img class="after-title pen-2" src="./assets/pen-2.svg" alt="" />
+        <div class="draw-hover-zone" aria-hidden="true"></div>
+      </section>
+    </main>
+    <script>
+const stage = document.querySelector(".stage");
+const glow = document.querySelector(".cursor-glow");
+const reactiveTiles = [...document.querySelectorAll(".float-react")];
+const proximityItems = [...document.querySelectorAll(".proximity")];
+const drawHoverZone = document.querySelector(".draw-hover-zone");
+const drawReplayTargets = [document.querySelector(".image-8"), document.querySelector(".pen-2")];
+let drawReplayArmed = true;
+let drawReplayTimer = null;
+const zones = [
+  {
+    name: "left",
+    x: 455,
+    y: 575,
+    radius: 285,
+    nodes: [...document.querySelectorAll('[data-zone="left"]')],
+  },
+  {
+    name: "right",
+    x: 1332,
+    y: 530,
+    radius: 330,
+    nodes: [...document.querySelectorAll('[data-zone="right"]')],
+  },
+];
+
+function resizeStage() {
+  const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+  stage.style.setProperty("--stage-scale", scale.toString());
+}
+
+function getStagePoint(event) {
+  const rect = stage.getBoundingClientRect();
+  return {
+    x: ((event.clientX - rect.left) / rect.width) * 1920,
+    y: ((event.clientY - rect.top) / rect.height) * 1080,
+  };
+}
+
+function distance(a, b) {
+  return Math.hypot(a.x - b.x, a.y - b.y);
+}
+
+function updateZones(point) {
+  zones.forEach((zone) => {
+    const active = distance(point, zone) <= zone.radius;
+    zone.nodes.forEach((node) => node.classList.toggle("visible", active));
+  });
+}
+
+function updateCorners(point) {
+  proximityItems.forEach((item) => {
+    const target = {
+      x: Number(item.dataset.proximityX),
+      y: Number(item.dataset.proximityY),
+    };
+    const radius = Number(item.dataset.proximityRadius);
+    item.classList.toggle("near", distance(point, target) <= radius);
+  });
+}
+
+function updateTiles(point) {
+  reactiveTiles.forEach((tile) => {
+    const rect = tile.getBoundingClientRect();
+    const stageRect = stage.getBoundingClientRect();
+    const center = {
+      x: ((rect.left + rect.width / 2 - stageRect.left) / stageRect.width) * 1920,
+      y: ((rect.top + rect.height / 2 - stageRect.top) / stageRect.height) * 1080,
+    };
+    const d = distance(point, center);
+    const magnet = tile.querySelector(".magnet");
+
+    if (d > 260) {
+      magnet.style.transform = "translate3d(0, 0, 0)";
+      return;
+    }
+
+    const force = (1 - d / 260) * 15;
+    const angle = Math.atan2(center.y - point.y, center.x - point.x);
+    const x = Math.cos(angle) * force;
+    const y = Math.sin(angle) * force;
+    magnet.style.transform = `translate3d(${x.toFixed(2)}px, ${y.toFixed(2)}px, 0)`;
+  });
+}
+
+function resetInteraction() {
+  stage.classList.remove("is-active");
+  zones.forEach((zone) => {
+    zone.nodes.forEach((node) => node.classList.remove("visible"));
+  });
+  proximityItems.forEach((item) => item.classList.remove("near"));
+  reactiveTiles.forEach((tile) => {
+    tile.querySelector(".magnet").style.transform = "translate3d(0, 0, 0)";
+  });
+}
+
+function replayDrawOnce() {
+  if (!drawReplayArmed) {
+    return;
+  }
+
+  drawReplayArmed = false;
+  window.clearTimeout(drawReplayTimer);
+  drawReplayTargets.forEach((target) => target.classList.remove("replay-draw", "draw-complete"));
+  drawReplayTargets.forEach((target) => void target.offsetWidth);
+
+  window.requestAnimationFrame(() => {
+    drawReplayTargets.forEach((target) => target.classList.add("replay-draw"));
+  });
+
+  drawReplayTimer = window.setTimeout(() => {
+    drawReplayTargets.forEach((target) => {
+      target.classList.remove("replay-draw");
+      target.classList.add("draw-complete");
+    });
+  }, 720);
+}
+
+function armDrawReplay() {
+  drawReplayArmed = true;
+}
+
+function handlePointerMove(event) {
+  const point = getStagePoint(event);
+  stage.classList.add("is-active");
+  glow.style.transform = `translate3d(${point.x}px, ${point.y}px, 0)`;
+  updateZones(point);
+  updateCorners(point);
+  updateTiles(point);
+}
+
+window.addEventListener("resize", resizeStage);
+drawHoverZone.addEventListener("pointerenter", replayDrawOnce);
+drawHoverZone.addEventListener("pointerleave", armDrawReplay);
+stage.addEventListener("pointermove", handlePointerMove);
+stage.addEventListener("pointerleave", resetInteraction);
+resizeStage();
+
+    </script>
+  </body>
+</html>
+
